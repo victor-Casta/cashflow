@@ -1,19 +1,31 @@
 <script>
-  import Home from './components/Home.vue';
+  import SplashScreen from './components/SplashScreen.vue';
+  import { defineAsyncComponent } from 'vue';
 
   export default {
     components: {
-      Home
+      SplashScreen,
+      Home: defineAsyncComponent(
+        () => new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(import('./components/Home.vue'))
+          }, 2000)
+        })
+      )
     }
   }
 </script>
 
 <template>
-  <Home />
+  <Suspense>
+    <template #default>
+      <Home />
+    </template>
+    <template #fallback>
+      <SplashScreen />
+    </template>
+  </Suspense>
 </template>
 
 <style scoped>
-  h1 {
-    color: greenyellow;
-  }
 </style>
