@@ -1,5 +1,5 @@
 <script>
-  import SplashScreen from './components/SplashScreen.vue';
+  import SplashScreen from './components/SplashScreen.vue'; 
   import { defineAsyncComponent } from 'vue';
 
   export default {
