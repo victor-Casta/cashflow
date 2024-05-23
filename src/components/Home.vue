@@ -19,7 +19,9 @@
             </Resume>
         </template>
         <template #movements>
-            <Movements />
+            <Movements
+            :movements="movements"
+            />
         </template>
     </Layout>
 </template>
@@ -28,7 +30,7 @@
     import Layout from './Layout.vue';
     import Header from './Header.vue';
     import Resume from './Resume/index.vue';
-    import Movements from './Movements.vue';
+    import Movements from './Movements/index.vue';
 
     export default {
         components: {
@@ -40,7 +42,45 @@
         data() {
             return {
                 label: null,
-                amount: null
+                amount: null,
+                movements: [
+                {
+                    id: 0,
+                    title: 'House',
+                    description: 'pay',
+                    amount: 1000000
+                },
+                {
+                    id: 1,
+                    title: 'Car',
+                    description: 'pay',
+                    amount: 9000000
+                },
+                {
+                    id: 2,
+                    title: 'Food',
+                    description: 'pay',
+                    amount: 400000
+                },
+                {
+                    id: 3,
+                    title: 'Clothes',
+                    description: 'pay',
+                    amount: 189000
+                },
+                {
+                    id: 4,
+                    title: 'Tecnology',
+                    description: 'pay',
+                    amount: 40000
+                },
+                {
+                    id: 5,
+                    title: 'Inversion',
+                    description: 'pay',
+                    amount: 4000000
+                },
+                ]
             }
         }
     }
