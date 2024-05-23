@@ -1,5 +1,6 @@
 <script setup>
     import { toRefs, defineProps } from "vue"
+    import Movement from "./Movement.vue";
 
     const props = defineProps({
         movements: {
@@ -16,9 +17,11 @@
     <section class="Movements">
         <h2 class="title">Historial</h2>
         <div class="content">
-            <div v-for="movement in movements" :key="movement.id">
-                {{ movement.title }}
-            </div>
+            <Movement 
+            v-for="movement in movements" 
+            :key="movement.id"
+            :title="movement.title"
+            />
         </div>
     </section>
 </template>
