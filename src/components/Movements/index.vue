@@ -1,49 +1,55 @@
-<script setup>
-    import { toRefs, defineProps } from "vue"
-    import Movement from "./Movement.vue";
-
-    const props = defineProps({
-        movements: {
-            type: Array,
-            default: () => [],
-        },
-    })
-
-    const { movements } = toRefs(props)
-
-</script>
-
 <template>
-    <section class="Movements">
+    <div class="movements">
         <h2 class="title">Historial</h2>
         <div class="content">
-            <Movement 
-            v-for="movement in movements" 
-            :key="movement.id"
-            :title="movement.title"
+            <Movement
+                v-for="{ id, title, description, amount } in movements"
+                :key="id"
+                :id="id"
+                :title="title"
+                :description="description"
+                :amount="amount"
+                @remove="remove"
             />
         </div>
-    </section>
+    </div>
 </template>
 
+<script setup>
+import { toRefs, defineProps } from 'vue';
+import Movement from "./Movement.vue";
+
+const props = defineProps({
+    movements: {
+        type: Array,
+        default: () => [],
+    },
+});
+
+const { movements } = toRefs(props);
+
+const remove = (id) => {
+    console.log("remove", id);
+}
+</script>
+
 <style scoped>
-    .movements {
-        max-height: 100%;
-        padding: 0 8px;
-        margin-bottom: 14px;
-    }
+.movements {
+  max-height: 100%;
+  padding: 0 20px;
+  margin-bottom: 14px;
+}
 
-    .title {
-        margin: 8px 16px 24px 16px;
-        color: #529fdf;
-    }
+.title {
+  margin: 8px 16px 24px 16px;
+  color: #76e7b8;
+}
 
-    .content {
-        max-height: 68vh;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        overflow-y: scroll;
-        padding: 0 16px;
-    }
+.content {
+  max-height: 68vh;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: scroll;
+}
 </style>
