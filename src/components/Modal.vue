@@ -26,7 +26,8 @@
         right: 0;
         top: 0;
         bottom: 0;
-        background-color: white;
+        background-color: #31363F;
+        color: #FFF;
     }
 
     .head {
