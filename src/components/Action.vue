@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-    import { defineComponent, ref } from "vue"
+    import { defineComponent, ref, defineEmits } from "vue"
     import Modal from './Modal.vue'
 
     const showModal = ref(false)
@@ -46,8 +46,21 @@
     const desciption = ref('')
     const movementType = ref('Ingreso')
 
+    const emit = defineEmits(['create'])
+
+    function aleatoryNumbers() {
+    return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER) + 1;
+    }
+
     const submit = () => {
         showModal.value = !showModal.value
+        emit('create', {
+            title: title.value,
+            desciption: desciption.value,
+            amount: movementType.value === 'Ingreso' ? amount.value : -amount.value,
+            time: new Date(),
+            id: aleatoryNumbers()
+        })
     }
 
 </script>
