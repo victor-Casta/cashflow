@@ -61,6 +61,10 @@
             time: new Date(),
             id: aleatoryNumbers()
         })
+        title.value = ''
+        desciption.value = ''
+        amount.value = 0
+        movementType.value = 'Ingreso'
     }
 
 </script>

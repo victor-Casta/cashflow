@@ -7,7 +7,7 @@
             <Resume
                 :total-label="'Ahorro total'"
                 :label="label"
-                :total-amount="1000000"
+                :total-amount="totalAmount"
                 :amount="amount"
             >
                 <template #graphic>
@@ -48,50 +48,7 @@ export default {
         return {
             label: null,
             amount: null,
-            movements: [
-                {
-                    id: 0,
-                    title: 'House',
-                    description: 'pay',
-                    amount: 300000,
-                    time: new Date("05-22-2024")
-                },
-                {
-                    id: 1,
-                    title: 'Car',
-                    description: 'pay',
-                    amount: 100000,
-                    time: new Date("05-22-2024")
-                },
-                {
-                    id: 2,
-                    title: 'Food',
-                    description: 'pay',
-                    amount: -50000,
-                    time: new Date("05-12-2024")
-                },
-                {
-                    id: 3,
-                    title: 'Clothes',
-                    description: 'pay',
-                    amount: -50000,
-                    time: new Date("05-12-2024")
-                },
-                {
-                    id: 4,
-                    title: 'Tecnology',
-                    description: 'pay',
-                    amount: 200000,
-                    time: new Date("06-01-2024")
-                },
-                {
-                    id: 5,
-                    title: 'Inversion',
-                    description: 'pay',
-                    amount: 100000,
-                    time: new Date("06-01-2024")
-                }
-            ]
+            movements: []
         };
     },
     computed: {
@@ -107,15 +64,36 @@ export default {
                     return acc + movement
                 }, 0)
             })
+        },
+        totalAmount() {
+            return this.movements.reduce((acc, movement) => {
+                return acc + movement.amount
+            }, 0)
+        }
+    },
+    mounted() {
+        const movements = JSON.parse(localStorage.getItem('movements'))
+        if (Array.isArray(movements)) {
+            this.movements = movements.map(movement => {
+            return {
+                ...movement,
+                time: new Date(movement.time)
+            }
+        })
         }
     },
     methods: {
         create(movement) {
             this.movements.push(movement)
+            this.save()
         },
         remove(id) {
            const index = this.movements.findIndex(movement => movement.id === id)
            this.movements.splice(index, 1)
+           this.save()
+        },
+        save() {
+            localStorage.setItem('movements', JSON.stringify(this.movements))
         }
     }
 };
